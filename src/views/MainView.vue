@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { NInput, NSpace, NButtonGroup, NButton, NIcon } from 'naive-ui'
-import { Cut20Regular, Copy20Regular, ClipboardLink20Regular } from '@vicons/fluent'
+import { Cut20Regular, Copy20Regular, ClipboardLink20Regular, GlobeSearch20Regular } from '@vicons/fluent'
 import MyMenu from '../components/MyMenu.vue'
 import MyPanel from '../components/MyPanel.vue'
 import { getTextarea } from '../util'
@@ -32,6 +32,11 @@ function copy () {
   const textarea = getTextarea(textareaSelector)
   textarea.focus()
   return navigator.clipboard.writeText(text.value)
+}
+
+function goSearch () {
+  const newUrl = `https://cse.google.com/cse?cx=64af2d0332cdd4c75#gsc.q=${text.value}`;
+  window.location.href = newUrl;
 }
 
 async function cut () {
@@ -85,6 +90,12 @@ async function copyLink () {
         @click="copyLink"
       >
         <n-icon :component="ClipboardLink20Regular" />
+      </n-button>
+      <n-button
+        secondary
+        @click="goSearch"
+      >
+        <n-icon :component="GlobeSearch20Regular" />
       </n-button>
     </n-button-group>
     <my-panel
